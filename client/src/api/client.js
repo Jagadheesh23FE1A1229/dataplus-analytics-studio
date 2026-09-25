@@ -1,10 +1,26 @@
 // Base API configuration and HTTP client
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const getApiBaseUrl = () => {
+  let url = import.meta.env.VITE_API_URL;
+  if (!url) {
+    if (
+      typeof window !== "undefined" &&
+      window.location.hostname !== "localhost" &&
+      window.location.hostname !== "127.0.0.1"
+    ) {
+      url = "https://dataplus-analytics-studio.onrender.com/api";
+    } else {
+      url = "http://localhost:5000/api";
+    }
+  }
+  return url.replace(/\/+$/, "");
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 const getHeaders = (isMultipart = false) => {
   const token = localStorage.getItem("datapulse_token");
   const headers = {};
-  if (token) {
+  if (token && token !== "null" && token !== "undefined") {
     headers["Authorization"] = `Bearer ${token}`;
   }
   if (!isMultipart) {
@@ -16,6 +32,9 @@ const getHeaders = (isMultipart = false) => {
 const handleResponse = async (res) => {
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
+    if (res.status === 401 && typeof window !== "undefined") {
+      localStorage.removeItem("datapulse_token");
+    }
     const errorMsg = data.message || `Request failed with status ${res.status}`;
     throw new Error(errorMsg);
   }

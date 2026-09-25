@@ -21,13 +21,20 @@ connectDB();
 
 const app = express();
 
-// Middleware
+// Dynamic CORS Middleware supporting credentials and production deployment
 app.use(
   cors({
-    origin: "*", // Allow all origins for seamless development and cross-device testing
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, Postman, or server-to-server) or reflect origin
+      callback(null, true);
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
   })
 );
+app.options("*", cors());
+
 app.use(express.json({ limit: "25mb" }));
 app.use(express.urlencoded({ extended: true, limit: "25mb" }));
 

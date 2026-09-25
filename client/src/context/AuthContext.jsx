@@ -5,14 +5,17 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(() => localStorage.getItem("datapulse_token"));
+  const [token, setToken] = useState(() => {
+    const t = localStorage.getItem("datapulse_token");
+    return t && t !== "null" && t !== "undefined" ? t : null;
+  });
   const [isLoading, setIsLoading] = useState(true);
 
   // Validate existing token on boot
   useEffect(() => {
     const initializeAuth = async () => {
       const storedToken = localStorage.getItem("datapulse_token");
-      if (storedToken) {
+      if (storedToken && storedToken !== "null" && storedToken !== "undefined") {
         try {
           const res = await api.getMe();
           if (res.success && res.user) {
@@ -24,6 +27,12 @@ export const AuthProvider = ({ children }) => {
           console.warn("Session check failed, signing out:", error.message);
           logout();
         }
+      } else {
+        if (storedToken) {
+          localStorage.removeItem("datapulse_token");
+        }
+        setToken(null);
+        setUser(null);
       }
       setIsLoading(false);
     };

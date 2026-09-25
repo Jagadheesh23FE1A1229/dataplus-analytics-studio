@@ -12,6 +12,14 @@ export const protect = async (req, res, next) => {
   ) {
     try {
       token = req.headers.authorization.split(" ")[1];
+      if (!token || token === "null" || token === "undefined") {
+        return res.status(401).json({
+          success: false,
+          message: "Not authorized, no valid bearer token provided.",
+        });
+      }
+
+      token = token.trim();
       const decoded = jwt.verify(
         token,
         process.env.JWT_SECRET || "super_secret_jwt_key_btech_analytics_2024_secure!"
@@ -20,8 +28,10 @@ export const protect = async (req, res, next) => {
       // Check if MongoDB is connected
       if (mongoose.connection.readyState === 1) {
         req.user = await User.findById(decoded.id).select("-password");
-      } else {
-        // Resilient in-memory fallback
+      }
+
+      // Fallback lookup in memoryStore if user not found in DB or DB disconnected
+      if (!req.user) {
         req.user = memoryStore.findUserById(decoded.id);
       }
 
@@ -32,7 +42,7 @@ export const protect = async (req, res, next) => {
         });
       }
 
-      next();
+      return next();
     } catch (error) {
       console.error("JWT Verification error:", error.message);
       return res.status(401).json({
@@ -40,9 +50,7 @@ export const protect = async (req, res, next) => {
         message: "Not authorized, token is invalid or expired.",
       });
     }
-  }
-
-  if (!token) {
+  } else {
     return res.status(401).json({
       success: false,
       message: "Not authorized, no bearer token provided.",

@@ -20,5 +20,8 @@
     "mongodb"
   ],
   "author": "B.Tech Final Year Student",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^8.3.1"
+  }
 }
