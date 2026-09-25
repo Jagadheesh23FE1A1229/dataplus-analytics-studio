@@ -1,0 +1,24 @@
+{
+  "name": "full-stack-business-analytics-dashboard-builder",
+  "version": "1.0.0",
+  "description": "Full Stack Business Analytics Dashboard Builder - MERN & Vite Capstone Project",
+  "scripts": {
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "build:client": "npm --prefix client run build",
+    "start": "npm --prefix server start",
+    "install:all": "npm --prefix server install && npm --prefix client install"
+  },
+  "keywords": [
+    "analytics",
+    "dashboard",
+    "business-intelligence",
+    "chartjs",
+    "react",
+    "vite",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "B.Tech Final Year Student",
+  "license": "MIT"
+}
