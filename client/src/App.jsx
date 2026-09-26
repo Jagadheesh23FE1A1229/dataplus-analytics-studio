@@ -79,7 +79,7 @@ const AppContent = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-slate-400">
+      <div className="min-h-screen bg-slate-950/80 backdrop-blur-md flex flex-col items-center justify-center text-slate-400">
         <div className="w-10 h-10 border-3 border-brand-500 border-t-transparent rounded-full animate-spin mb-4" />
         <p className="text-sm font-semibold text-slate-300">Initializing DataPulse Studio...</p>
       </div>
@@ -96,7 +96,7 @@ const AppContent = () => {
 
   if (!isAuthenticated && !isPublicRoute) {
     return (
-      <div className="min-h-screen bg-slate-950">
+      <div className="min-h-screen bg-slate-950/40">
         <LoginPage
           onSwitchToRegister={() => (window.location.hash = "#/register")}
           onSuccess={() => (window.location.hash = "#/overview")}
@@ -143,7 +143,7 @@ const AppContent = () => {
   if (baseRoute === "view") {
     const viewDashboardId = routeParam || queryParams.get("id");
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-6 lg:p-8">
+      <div className="min-h-screen bg-slate-950/40 text-slate-100 p-4 sm:p-6 lg:p-8">
         <DashboardViewer
           dashboardId={viewDashboardId}
           onBack={() => (window.location.hash = "#/dashboards")}
@@ -154,7 +154,7 @@ const AppContent = () => {
 
   // Workspace Layout for Overview, Datasets, Dashboards, and Visual Builder
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen bg-slate-950/40 text-slate-100 flex flex-col selection:bg-brand-500 selection:text-white">
       {/* Top Navbar */}
       <Navbar
         onOpenUpload={() => setIsUploadModalOpen(true)}

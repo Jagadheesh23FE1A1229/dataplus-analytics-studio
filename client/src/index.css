@@ -3,8 +3,16 @@
 
 body {
   background-color: #070c18;
+  background-image: 
+    radial-gradient(ellipse at top, rgba(15, 23, 42, 0.55) 0%, rgba(7, 12, 24, 0.86) 75%, rgba(5, 8, 16, 0.95) 100%),
+    url('/bg-analytics.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: #f1f5f9;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  min-height: 100vh;
 }
 
   /* Custom subtle scrollbars */
@@ -13,7 +21,7 @@ body {
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #0b0f19;
+    background: rgba(11, 15, 25, 0.5);
   }
   ::-webkit-scrollbar-thumb {
     background: #243048;
@@ -25,21 +33,23 @@ body {
 
 /* Glassmorphism effects */
 .glass-panel {
-  background: rgba(17, 24, 39, 0.7);
+  background: rgba(15, 23, 42, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-card {
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(15, 23, 42, 0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
 }
 
 .glass-card:hover {
-  border-color: rgba(99, 102, 241, 0.3);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 12px 40px 0 rgba(99, 102, 241, 0.15);
 }
 
 /* Print styling for PDF/Printer export mode */

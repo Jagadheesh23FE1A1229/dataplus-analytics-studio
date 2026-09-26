@@ -21,7 +21,7 @@ export const LandingPage = ({ onGetStarted, onLogin }) => {
   const { isAuthenticated } = useAuth();
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen bg-slate-950/40 text-slate-100 selection:bg-brand-500 selection:text-white">
       {/* Top Header */}
       <header className="sticky top-0 z-50 glass-panel border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -147,7 +147,7 @@ export const LandingPage = ({ onGetStarted, onLogin }) => {
       </section>
 
       {/* Interactive Workflow Section */}
-      <section className="py-20 border-t border-slate-900 bg-slate-950/60">
+      <section className="py-20 border-t border-slate-900/60 bg-slate-950/40 backdrop-blur-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-bold text-brand-400 uppercase tracking-widest mb-2">
@@ -207,7 +207,7 @@ export const LandingPage = ({ onGetStarted, onLogin }) => {
       </section>
 
       {/* Tech Stack Banner for B.Tech Viva & Placement */}
-      <section className="py-16 border-t border-slate-900 bg-slate-900/30">
+      <section className="py-16 border-t border-slate-900/60 bg-slate-900/20 backdrop-blur-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">
             Industry Standard Full-Stack Architecture
